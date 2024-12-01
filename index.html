@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>DavidX's Homepage</title>
     <link rel="icon" href="static/avatar.png" type="image/svg+xml">
+    <script>
+        if (!window.location.pathname.startsWith('/static')) {
+            window.location.href = 'https://blog.davidx.us.kg' + window.location.pathname + window.location.search + window.location.hash;
+        }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
