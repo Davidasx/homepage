@@ -1,8 +1,8 @@
-git config --global user.email "187073425+invisible-gaopg@users.noreply.github.com"
-git config --global user.name "invisible-gaopg"
-gh auth switch -u invisible-gaopg
+git config --global user.email "190557641+DavidBloggerTest@users.noreply.github.com"
+git config --global user.name "DavidBloggerTest"
+gh auth switch -u DavidBloggerTest
 git add .
-git commit -m "Update"
+git commit -m "Blog Update"
 git push
 git config --global user.email "81460770+Davidasx@users.noreply.github.com"
 git config --global user.name "Davidasx"
