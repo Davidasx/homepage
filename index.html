@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>DavidX's Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="static/avatar.png" type="image/svg+xml">
     <style>
         body {
@@ -77,6 +77,95 @@
             }
         }
     </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            /* 减小移动端padding */
+            background-color: #f5f5f5;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .avatar {
+            width: 120px;
+            /* 移动端稍微缩小头像 */
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin: 10px 0;
+        }
+
+        .category h2 {
+            font-size: 1.4em;
+        }
+
+        .nav-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+
+        .nav-box {
+            padding: 15px;
+            width: 100%;
+            min-height: 60px;
+        }
+
+        .nav-box a {
+            font-size: 1em;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .nav-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .nav-box {
+                padding: 12px;
+                min-height: 50px;
+            }
+
+            .link-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* 小屏幕设备适配 */
+        @media (max-width: 320px) {
+            body {
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .category h2 {
+                font-size: 1.2em;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -90,6 +179,14 @@
                 <a href="https://github.davidx.top">
                     <img src="static/github.ico" alt="GitHub" class="link-icon">
                     GitHub Acceleration
+                </a>
+            </div>
+        </div>
+        <div class="nav-container">
+            <div class="nav-box">
+                <a href="https://free-chat.davidx.top">
+                    <img src="static/chatgpt.ico" alt="ChatGPT" class="link-icon">
+                    Free AI Chat
                 </a>
             </div>
         </div>
