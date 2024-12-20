@@ -4,50 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="static/avatar.png" type="image/svg+xml">
+    <meta name="description" content="DavidX的个人导航站 - 工具、博客和联系方式">
+    <title>DavidX's Homepage</title>
+    <link rel="icon" href="static/avatar.png" type="image/png">
     <style>
+        :root {
+            --primary-color: #0366d6;
+            --hover-color: #024eaf;
+            --bg-color: #f5f5f5;
+            --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             text-align: center;
-            padding: 50px;
-            background-color: #f5f5f5;
+            padding: 20px;
+            background-color: var(--bg-color);
+            line-height: 1.6;
         }
 
         .avatar {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 20px;
+            margin: 20px auto;
         }
 
         .category {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            padding: 0 15px;
         }
 
         .category h2 {
             color: #333;
-            margin-bottom: 15px;
+            margin: 15px 0;
+            font-size: 1.5rem;
         }
 
         .nav-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto 15px;
         }
 
         .nav-box {
-            padding: 20px;
             background-color: #ffffff;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 45%;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            border-radius: 12px;
+            box-shadow: var(--box-shadow);
+            padding: 15px;
+            transition: transform 0.2s ease;
+            width: 100%;
+        }
+
+        .nav-box:hover {
+            transform: translateY(-2px);
         }
 
         .nav-box a {
@@ -55,114 +76,38 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: #0366d6;
-            font-size: 1.1em;
-            margin: 10px 0;
-            width: 100%;
+            color: var(--primary-color);
+            font-size: 1rem;
+            padding: 5px;
         }
 
         .nav-box a:hover {
-            color: #024eaf;
+            color: var(--hover-color);
         }
 
         .link-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
 
-        @media (max-width: 768px) {
-            .nav-box {
-                width: 80%;
-            }
-        }
-    </style>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            /* 减小移动端padding */
-            background-color: #f5f5f5;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .avatar {
-            width: 120px;
-            /* 移动端稍微缩小头像 */
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 1.8em;
-            margin: 10px 0;
-        }
-
-        .category h2 {
-            font-size: 1.4em;
-        }
-
-        .nav-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            padding: 0 10px;
-            margin-bottom: 15px;
-        }
-
-        .nav-box {
-            padding: 15px;
-            width: 100%;
-            min-height: 60px;
-        }
-
-        .nav-box a {
-            font-size: 1em;
-        }
-
-        /* 移动端适配 */
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             body {
-                padding: 10px;
+                padding: 40px;
             }
 
             .nav-container {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .nav-box {
-                padding: 12px;
-                min-height: 50px;
-            }
-
-            .link-icon {
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        /* 小屏幕设备适配 */
-        @media (max-width: 320px) {
-            body {
-                padding: 5px;
-            }
-
-            h1 {
-                font-size: 1.5em;
-            }
-
-            .category h2 {
-                font-size: 1.2em;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .avatar {
-                width: 100px;
-                height: 100px;
+                width: 150px;
+                height: 150px;
+            }
+
+            .nav-box {
+                width: calc(50% - 7.5px);
+                /* 考虑间距的一半宽度 */
             }
         }
     </style>
@@ -181,8 +126,6 @@
                     GitHub Acceleration
                 </a>
             </div>
-        </div>
-        <div class="nav-container">
             <div class="nav-box">
                 <a href="https://free-chat.davidx.top">
                     <img src="static/chatgpt.ico" alt="ChatGPT" class="link-icon">
@@ -200,8 +143,6 @@
                     Blog (International)
                 </a>
             </div>
-        </div>
-        <div class="nav-container">
             <div class="nav-box">
                 <a href="https://blog-zh.davidx.top">
                     <img src="static/avatar.png" alt="DavidX" class="link-icon">
@@ -219,8 +160,6 @@
                     Email
                 </a>
             </div>
-        </div>
-        <div class="nav-container">
             <div class="nav-box">
                 <a href="https://github.com/Davidasx">
                     <img src="static/github.ico" alt="GitHub" class="link-icon">
