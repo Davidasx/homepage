@@ -133,13 +133,49 @@
             -ms-user-select: none;
             user-select: none;
         }
+
+        .typing-container {
+            margin: 20px auto;
+            min-height: 60px;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .typing {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            animation: blink 0.7s infinite;
+            color: var(--primary-color);
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
 <body><button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
     <img src="static/avatar.png" alt="DavidX" class="avatar">
     <h1><span data-i18n="homepage">DavidX's Homepage</span></h1>
-
+    <div class="typing-container">
+        <span id="typing-text" class="typing"></span>
+        <span class="cursor">|</span>
+    </div>
     <div class="category">
         <h2>🛠️ <span data-i18n="tools">Tools</span></h2>
         <div class="nav-container">
@@ -202,7 +238,8 @@
                 'blog-int': 'Blog (International)',
                 'blog-cn': 'Blog (Chinese)',
                 'contact': 'Contact',
-                'email': 'Email'
+                'email': 'Email',
+                'intro': 'Hi, I\'m DavidX. I\'m a personal developer who loves coding. Welcome to my homepage. You can check out the tools I\'ve made or visit my blog. Feel free to contact me anytime!'
             },
             'zh': {
                 'homepage': 'DavidX的主页',
@@ -213,7 +250,8 @@
                 'blog-int': '博客（国际版）',
                 'blog-cn': '博客（国内版）',
                 'contact': '联系',
-                'email': '邮箱'
+                'email': '邮箱',
+                'intro': '您好，我是DavidX。我是一名热爱编程的个人开发者。欢迎来到我的主页，您可以查看我做的各种工具，或者访问我的博客。如果您感兴趣，可以随时联系我！'
             }
         };
 
@@ -244,6 +282,9 @@
                     element.textContent = i18n[currentLang][key];
                 }
             });
+
+            const typingElement = document.getElementById('typing-text');
+            typeText(i18n[currentLang]['intro'], typingElement);
         }
 
         // 页面加载时应用语言设置
@@ -269,6 +310,20 @@
                 return false;
             }
         });
+
+        function typeText(text, element, speed = 100) {
+            let index = 0;
+            element.textContent = '';
+
+            function type() {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
     </script>
 </body>
 
