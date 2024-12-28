@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DavidX的个人导航站 - 工具、博客和联系方式">
+    <meta name="description" content="DavidX's Homepage - Tools, Personal, Contact">
     <title>DavidX's Homepage</title>
     <link rel="icon" href="static/avatar.png" type="image/png">
     <style>
@@ -110,54 +110,77 @@
                 /* 考虑间距的一半宽度 */
             }
         }
+
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+        }
+
+        .language-switch:hover {
+            background: #f0f0f0;
+        }
+
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
     </style>
 </head>
 
-<body>
+<body><button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
     <img src="static/avatar.png" alt="DavidX" class="avatar">
-    <h1>DavidX's Homepage</h1>
+    <h1><span data-i18n="homepage">DavidX's Homepage</span></h1>
 
     <div class="category">
-        <h2>🛠️ Tools</h2>
+        <h2>🛠️ <span data-i18n="tools">Tools</span></h2>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="https://github.davidx.top">
                     <img src="static/github.ico" alt="GitHub" class="link-icon">
-                    GitHub Acceleration
+                    <span data-i18n="github-acc">GitHub Acceleration</span>
                 </a>
             </div>
             <div class="nav-box">
                 <a href="https://free-chat.davidx.top">
                     <img src="static/chatgpt.ico" alt="ChatGPT" class="link-icon">
-                    Free AI Chat
+                    <span data-i18n="ai-chat">Free AI Chat</span>
                 </a>
             </div>
         </div>
     </div>
     <div class="category">
-        <h2>👤 Personal</h2>
+        <h2>👤 <span data-i18n="personal">Personal</span></h2>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="https://blog.davidx.top">
                     <img src="static/avatar.png" alt="DavidX" class="link-icon">
-                    Blog (International)
+                    <span data-i18n="blog-int">Blog (International)</span>
                 </a>
             </div>
             <div class="nav-box">
                 <a href="https://blog-zh.davidx.top">
                     <img src="static/avatar.png" alt="DavidX" class="link-icon">
-                    博客（国内版）
+                    <span data-i18n="blog-cn">Blog (Chinese)</span>
                 </a>
             </div>
         </div>
     </div>
     <div class="category">
-        <h2>📞 Contact</h2>
+        <h2>📞 <span data-i18n="contact">Contact</span></h2>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="mailto:homepage@davidx.top">
                     <img src="static/mail.ico" alt="Email" class="link-icon">
-                    Email
+                    <span data-i18n="email">Email</span>
                 </a>
             </div>
             <div class="nav-box">
@@ -168,7 +191,85 @@
             </div>
         </div>
     </div>
+    <script>
+        const i18n = {
+            'en': {
+                'homepage': 'DavidX\'s Homepage',
+                'tools': 'Tools',
+                'github-acc': 'GitHub Acceleration',
+                'ai-chat': 'Free AI Chat',
+                'personal': 'Personal',
+                'blog-int': 'Blog (International)',
+                'blog-cn': 'Blog (Chinese)',
+                'contact': 'Contact',
+                'email': 'Email'
+            },
+            'zh': {
+                'homepage': 'DavidX的主页',
+                'tools': '工具',
+                'github-acc': 'GitHub文件加速',
+                'ai-chat': '免费AI聊天',
+                'personal': '个人',
+                'blog-int': '博客（国际版）',
+                'blog-cn': '博客（国内版）',
+                'contact': '联系',
+                'email': '邮箱'
+            }
+        };
 
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            // 如果浏览器语言以zh开头(包含zh-CN, zh-TW等)，返回中文，否则返回英文
+            return browserLang.startsWith('zh') ? 'zh' : 'en';
+        }
+
+        let currentLang = localStorage.getItem('language') || detectBrowserLanguage();
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('language', currentLang);
+            updateContent();
+        }
+
+        function updateContent() {
+            document.getElementById('langBtn').textContent = currentLang === 'zh' ? 'EN' : '中文';
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+            // 更新网页标题
+            document.title = i18n[currentLang]['homepage'];
+
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    element.textContent = i18n[currentLang][key];
+                }
+            });
+        }
+
+        // 页面加载时应用语言设置
+        document.addEventListener('DOMContentLoaded', updateContent);
+        // 禁用右键菜单
+        //document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 禁止复制
+        document.addEventListener('copy', event => event.preventDefault());
+
+        // 禁止粘贴
+        document.addEventListener('paste', event => event.preventDefault());
+
+        // 禁止剪切
+        document.addEventListener('cut', event => event.preventDefault());
+
+        // 禁用F12和其他开发者工具快捷键
+        document.addEventListener('keydown', function (event) {
+            if (event.keyCode === 123 ||
+                (event.ctrlKey && event.shiftKey && event.keyCode === 73) ||
+                (event.ctrlKey && event.keyCode === 85)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </body>
 
 </html>
