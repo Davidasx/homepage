@@ -289,8 +289,26 @@
 
         // 页面加载时应用语言设置
         document.addEventListener('DOMContentLoaded', updateContent);
-        // 禁用右键菜单
-        //document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 右键菜单控制
+        document.addEventListener('contextmenu', function (event) {
+            // 检查点击的元素或其父元素是否为链接
+            let element = event.target;
+            let isLink = false;
+
+            while (element) {
+                if (element.tagName === 'A') {
+                    isLink = true;
+                    break;
+                }
+                element = element.parentElement;
+            }
+
+            // 如果不是链接元素，则阻止默认行为
+            if (!isLink) {
+                event.preventDefault();
+            }
+        });
 
         // 禁止复制
         document.addEventListener('copy', event => event.preventDefault());
@@ -311,7 +329,14 @@
             }
         });
 
+        let typingTimer = null;
+
         function typeText(text, element, speed = 100) {
+            // 清除之前的定时器
+            if (typingTimer) {
+                clearTimeout(typingTimer);
+            }
+
             let index = 0;
             element.textContent = '';
 
@@ -319,7 +344,7 @@
                 if (index < text.length) {
                     element.textContent += text.charAt(index);
                     index++;
-                    setTimeout(type, speed);
+                    typingTimer = setTimeout(type, speed);
                 }
             }
             type();
