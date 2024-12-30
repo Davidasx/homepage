@@ -563,9 +563,20 @@
     <script>
         const themeToggle = document.getElementById('themeToggle');
         const root = document.documentElement;
+        // 检测系统主题
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        // 优先使用本地存储的主题,如果没有则使用系统主题
+        const savedTheme = localStorage.getItem('theme') || systemTheme;
 
-        // 从 localStorage 获取保存的主题
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        // 监听系统主题变化
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                // 只有在用户没有手动设置主题时才跟随系统
+                const newTheme = e.matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', newTheme);
+            }
+        });
+
         root.setAttribute('data-theme', savedTheme);
 
         themeToggle.addEventListener('click', () => {
