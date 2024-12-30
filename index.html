@@ -15,6 +15,26 @@
             --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
+        .snow-toggle {
+            position: fixed;
+            top: 20px;
+            right: 80px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            display: none;
+            /* 默认隐藏 */
+        }
+
+        .snow-toggle.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -166,10 +186,20 @@
                 opacity: 1;
             }
         }
+
+        #snow-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 
-<body><button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
+<body>
+    <button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
+    <button class="snow-toggle" id="snowToggle">❄️</button>
     <img src="static/avatar.png" alt="DavidX" class="avatar">
     <h1><span data-i18n="homepage">DavidX's Homepage</span></h1>
     <div class="typing-container">
@@ -349,6 +379,126 @@
             }
             type();
         }
+    </script>
+
+    <canvas id="snow-canvas"></canvas>
+    <script>
+        const snowToggle = document.getElementById('snowToggle');
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function isWinterSeason() {
+            const month = new Date().getMonth() + 1;
+            return month === 12 || month === 1 || month === 2;
+        }
+
+        // 检查是否应该显示雪花
+        function shouldShowSnow() {
+            if (!isWinterSeason()) {
+                return false;
+            }
+            snowToggle.style.display = 'block';
+            const snowEnabled = localStorage.getItem('snowEnabled');
+            if (snowEnabled === null) {
+                // 冬季首次访问，默认开启
+                localStorage.setItem('snowEnabled', 'true');
+                snowToggle.classList.add('active');
+                return true;
+            } else {
+                // 根据用户设置显示
+                snowToggle.classList.toggle('active', snowEnabled === 'true');
+                return snowEnabled === 'true';
+            }
+        }
+
+        // 设置Canvas大小为窗口大小
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        // 根据季节控制雪花显示
+        function initSnowEffect() {
+            if (shouldShowSnow()) {
+                canvas.style.display = 'block';
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                // 雪花类
+                class Snowflake {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = -10;
+                        this.size = Math.random() * 3 + 2;
+                        this.speed = Math.random() * 1 + 0.5;
+                        this.wind = Math.random() * 0.5 - 0.25;
+                        this.opacity = Math.random() * 0.5 + 0.5;
+                    }
+
+                    update() {
+                        this.y += this.speed;
+                        this.x += this.wind;
+
+                        // 返回是否需要删除此雪花
+                        return this.y > canvas.height;
+                    }
+
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                        ctx.fill();
+                    }
+                }
+
+                // 存储当前的雪花
+                const snowflakes = new Set();
+
+                // 生成新雪花的函数
+                function generateSnowflake() {
+                    // 根据画布宽度计算合适的生成概率
+                    const probability = canvas.width / 1920; // 基准宽度1920px
+                    if (Math.random() < 0.2 * probability) {
+                        snowflakes.add(new Snowflake());
+                    }
+                }
+
+                // 设置定时器，每50ms尝试生成新雪花
+                setInterval(generateSnowflake, 20);
+
+                // 动画循环
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // 使用Set和迭代器来安全地删除雪花
+                    for (const snowflake of snowflakes) {
+                        if (snowflake.update()) {
+                            snowflakes.delete(snowflake);
+                        } else {
+                            snowflake.draw();
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+
+                animate();
+
+                // 窗口大小改变时，调整雪花生成概率
+                window.addEventListener('resize', resizeCanvas);
+            } else {
+                canvas.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initSnowEffect();
+        });
+        snowToggle.addEventListener('click', () => {
+            const currentState = localStorage.getItem('snowEnabled') === 'true';
+            const newState = !currentState;
+            localStorage.setItem('snowEnabled', newState);
+            initSnowEffect();
+        });
     </script>
 </body>
 
