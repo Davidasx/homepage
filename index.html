@@ -12,27 +12,99 @@
             --primary-color: #0366d6;
             --hover-color: #024eaf;
             --bg-color: #f5f5f5;
+            --text-color: #24292e;
+            --border-color: #ddd;
+            --inner-color: #fff;
+            --hover-inner-color: #f0f0f0;
             --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .snow-toggle {
+        :root[data-theme="dark"] {
+            /* 暗色主题变量 */
+            --primary-color: #58a6ff;
+            --hover-color: #79b8ff;
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --border-color: #30363d;
+            --inner-color: #161b22;
+            --hover-inner-color: #21262d;
+            --box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+        }
+
+        /* 添加新的容器样式 */
+        .buttons-container {
             position: fixed;
             top: 20px;
-            right: 80px;
+            right: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        /* 添加以下样式确保隐藏的按钮不占空间 */
+        .buttons-container>*[style*="display: none"],
+        .buttons-container>.hidden {
+            display: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        /* 修改现有按钮样式 */
+        .language-switch {
+            /* 移除 position, top, right */
+            background: var(--inner-color);
             padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             cursor: pointer;
             box-shadow: var(--box-shadow);
-            z-index: 1000;
+            color: var(--text-color);
+        }
+
+        .theme-toggle {
+            /* 移除 position, top, right */
+            padding: 8px 16px;
+            background: var(--inner-color);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .snow-toggle {
+            /* 移除 position, top, right */
+            padding: 8px 16px;
+            background: var(--inner-color);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
             display: none;
             /* 默认隐藏 */
         }
 
+        .language-switch:hover {
+            background: var(--hover-inner-color);
+        }
+
+        .theme-toggle:hover {
+            background: var(--hover-inner-color);
+        }
+
+        .snow-toggle:hover {
+            background: var(--hover-inner-color);
+        }
+
         .snow-toggle.active {
             background: var(--primary-color);
-            color: white;
+            color: var(--inner-color);
+        }
+
+        .snow-toggle.active:hover {
+            background: var(--hover-color);
+            color: var(--inner-color);
         }
 
         * {
@@ -46,6 +118,7 @@
             text-align: center;
             padding: 20px;
             background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
@@ -63,7 +136,7 @@
         }
 
         .category h2 {
-            color: #333;
+            color: var(--text-color);
             margin: 15px 0;
             font-size: 1.5rem;
         }
@@ -78,8 +151,8 @@
         }
 
         .nav-box {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
+            background-color: var(--inner-color);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             box-shadow: var(--box-shadow);
             padding: 15px;
@@ -131,22 +204,6 @@
             }
         }
 
-        .language-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-            box-shadow: var(--box-shadow);
-        }
-
-        .language-switch:hover {
-            background: #f0f0f0;
-        }
-
         body {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -163,7 +220,7 @@
 
         .typing {
             font-size: 1.1rem;
-            color: #333;
+            color: var(--text-color);
         }
 
         .cursor {
@@ -198,8 +255,11 @@
 </head>
 
 <body>
-    <button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
-    <button class="snow-toggle" id="snowToggle">❄️</button>
+    <div class="buttons-container">
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+        <button class="snow-toggle" id="snowToggle">❄️</button>
+        <button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
+    </div>
     <img src="static/avatar.png" alt="DavidX" class="avatar">
     <h1><span data-i18n="homepage">DavidX's Homepage</span></h1>
     <div class="typing-container">
@@ -498,6 +558,22 @@
             const newState = !currentState;
             localStorage.setItem('snowEnabled', newState);
             initSnowEffect();
+        });
+    </script>
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const root = document.documentElement;
+
+        // 从 localStorage 获取保存的主题
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        root.setAttribute('data-theme', savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
         });
     </script>
 </body>
