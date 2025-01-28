@@ -374,7 +374,7 @@
                 'wikipedia': 'Wikipedia',
                 'wikipedia-desc': 'Mirror site of Wikipedia. For study purposes only.',
                 'claude': 'Claude',
-                'claude-desc': 'Use claude.ai in restricted areas. For study purposes only.',
+                'claude-desc': 'Use claude.ai in restricted areas without getting banned. For study purposes only.',
                 'personal': 'Personal',
                 'blog-int': 'Blog (International)',
                 'blog-int-desc': 'My personal blog, written in English.',
@@ -617,7 +617,6 @@
                     if (snowGeneratorId) {
                         clearInterval(snowGeneratorId);
                         snowGeneratorId = null;
-                        console.log('pause snow generator');
                     }
 
                     if (animationFrameId) {
