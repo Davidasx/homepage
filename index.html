@@ -13,6 +13,7 @@
             --hover-color: #024eaf;
             --bg-color: #f5f5f5;
             --text-color: #24292e;
+            --subtext-color: #586069;
             --border-color: #ddd;
             --inner-color: #fff;
             --hover-inner-color: #f0f0f0;
@@ -25,6 +26,7 @@
             --hover-color: #79b8ff;
             --bg-color: #0d1117;
             --text-color: #c9d1d9;
+            --subtext-color: #8b949e;
             --border-color: #30363d;
             --inner-color: #161b22;
             --hover-inner-color: #21262d;
@@ -178,6 +180,13 @@
             color: var(--hover-color);
         }
 
+        .nav-description {
+            margin: 5px 0 0 0;
+            font-size: 0.8em;
+            color: var(--subtext-color);
+            text-align: center;
+        }
+
         .link-icon {
             width: 20px;
             height: 20px;
@@ -261,85 +270,94 @@
         <button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
     </div>
     <img src="static/avatar.png" alt="DavidX" class="avatar">
-    <h1><span data-i18n="homepage">DavidX's Homepage</span></h1>
+    <h1><span data-i18n="homepage"></span></h1>
     <div class="typing-container">
         <span id="typing-text" class="typing"></span>
         <span class="cursor">|</span>
     </div>
     <div class="category">
-        <h2>🛠️ <span data-i18n="tools">Tools</span></h2>
+        <h2>🛠️ <span data-i18n="tools"></span></h2>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="https://github.davidx.top">
                     <img src="static/github.ico" alt="GitHub" class="link-icon">
-                    <span data-i18n="github-acc">GitHub File Acceleration</span>
+                    <span data-i18n="github-acc"></span>
                 </a>
+                <p class="nav-description" data-i18n="github-acc-desc"></p>
             </div>
             <div class="nav-box">
                 <a href="https://free-chat.davidx.top">
                     <img src="https://free-chat.davidx.top/static/images/favicon.ico" alt="ChatGPT" class="link-icon">
-                    <span data-i18n="ai-chat">Free AI Chat</span>
+                    <span data-i18n="ai-chat"></span>
                 </a>
+                <p class="nav-description" data-i18n="ai-chat-desc"></p>
             </div>
         </div>
     </div>
     <div class="category">
-        <h2>🌐 <span data-i18n="mirrors">Mirror Sites</span></h2>
+        <h2>🌐 <span data-i18n="mirrors"></span></h2>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="https://wiki.davidx.top">
                     <img src="https://wiki.davidx.top/favicon.ico" alt="Wikipedia" class="link-icon">
-                    <span data-i18n="wikipedia">Wikipedia</span>
+                    <span data-i18n="wikipedia"></span>
                 </a>
+                <p class="nav-description" data-i18n="wikipedia-desc"></p>
             </div>
             <div class="nav-box">
                 <a href="https://claude.davidx.top">
                     <img src="https://claude.davidx.top/favicon.ico" alt="Claude" class="link-icon">
-                    <span data-i18n="claude">Claude</span>
+                    <span data-i18n="claude"></span>
                 </a>
+                <p class="nav-description" data-i18n="claude-desc"></p>
             </div>
         </div>
     </div>
     <div class="category">
-        <h2>👤 <span data-i18n="personal">Personal</span></h2>
+        <h2>👤 <span data-i18n="personal"></span></h2>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="https://blog.davidx.top">
                     <img src="https://blog.davidx.top/images/favicon.ico" alt="DavidX" class="link-icon">
-                    <span data-i18n="blog-int">Blog (International)</span>
+                    <span data-i18n="blog-int"></span>
                 </a>
+                <p class="nav-description" data-i18n="blog-int-desc"></p>
             </div>
             <div class="nav-box">
                 <a href="https://blog-zh.davidx.top">
                     <img src="https://blog-zh.davidx.top/images/favicon.ico" alt="DavidX" class="link-icon">
-                    <span data-i18n="blog-cn">Blog (Chinese)</span>
+                    <span data-i18n="blog-cn"></span>
                 </a>
+                <p class="nav-description" data-i18n="blog-cn-desc"></p>
             </div>
         </div>
     </div>
     <div class="category">
-        <h2>📞 <span data-i18n="contact">Contact</span></h2>
+        <h2>📞 <span data-i18n="contact"></span></h2>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="mailto:homepage@davidx.top">
                     <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>📧</text></svg>"
                         alt="Email" class="link-icon">
-                    <span data-i18n="email">Email</span>
+                    <span data-i18n="email"></span>
                 </a>
+                <p class="nav-description" data-i18n="email-desc"></p>
             </div>
             <div class="nav-box">
                 <a href="https://github.com/Davidasx">
                     <img src="static/github.ico" alt="GitHub" class="link-icon">
-                    GitHub
+                    <span data-i18n="github"></span>
                 </a>
+                <p class="nav-description" data-i18n="github-desc"></p>
             </div>
         </div>
         <div class="nav-container">
             <div class="nav-box">
                 <a href="https://t.me/davidasx">
                     <img src="static/telegram.ico" alt="Telegram" class="link-icon">
-                    <span data-i18n="telegram">Telegram</span>
+                    <span data-i18n="telegram"></span>
                 </a>
+                <p class="nav-description" data-i18n="telegram-desc"></p>
             </div>
         </div>
     </div>
@@ -349,39 +367,58 @@
                 'homepage': 'DavidX\'s Homepage',
                 'tools': 'Tools',
                 'github-acc': 'GitHub File Acceleration',
+                'github-acc-desc': 'Accelerates GitHub file downloading. For study purposes only.',
                 'ai-chat': 'Free AI Chat',
+                'ai-chat-desc': 'Chat online with LLMs for free.',
                 "mirrors": 'Mirror Sites',
                 'wikipedia': 'Wikipedia',
+                'wikipedia-desc': 'Mirror site of Wikipedia. For study purposes only.',
                 'claude': 'Claude',
+                'claude-desc': 'Use claude.ai in restricted areas. For study purposes only.',
                 'personal': 'Personal',
                 'blog-int': 'Blog (International)',
+                'blog-int-desc': 'My personal blog, written in English.',
                 'blog-cn': 'Blog (Chinese)',
+                'blog-cn-desc': 'My personal blog, written in Chinese.',
                 'contact': 'Contact',
                 'email': 'Email',
+                'email-desc': 'You can send me an email for contact.',
+                'github': 'GitHub',
+                'github-desc': 'My GitHub account with most of my projects in it.',
                 'telegram': 'Telegram',
+                'telegram-desc': 'You can contact me via Telegram as well.',
                 'intro': 'Hello, I\'m DavidX, a personal developer who loves coding. Welcome to my homepage! You can check out the tools I\'ve made or visit my blog. Feel free to contact me anytime!'
             },
             'zh': {
                 'homepage': 'DavidX的主页',
                 'tools': '工具',
                 'github-acc': 'GitHub文件加速',
+                'github-acc-desc': '加速GitHub文件下载。仅供学习目的。',
                 'ai-chat': '免费AI聊天',
+                'ai-chat-desc': '免费的AI聊天。',
                 "mirrors": '镜像网站',
                 'wikipedia': '维基百科',
+                'wikipedia-desc': '维基百科镜像站。仅供学习目的。（懂得都懂）',
                 'claude': 'Claude',
+                'claude-desc': '稳定使用claude.ai，避免封号。仅供学习目的。',
                 'personal': '个人',
                 'blog-int': '博客（国际版）',
+                'blog-int-desc': '英文版的个人博客。',
                 'blog-cn': '博客（国内版）',
+                'blog-cn-desc': '中文版的个人博客。',
                 'contact': '联系',
                 'email': '电子邮件',
+                'email-desc': '你可以给我发电子邮件。',
+                'github': 'GitHub',
+                'github-desc': '我的GitHub账户，你可以看到我大部分的项目。',
                 'telegram': 'Telegram',
+                'telegram-desc': '你也可以通过TG私信我。',
                 'intro': '您好，我是DavidX，一名热爱编程的个人开发者。欢迎来到我的主页！您可以查看我做的各种工具，或者访问我的博客。如果您感兴趣，可以随时联系我！'
             }
         };
 
         function detectBrowserLanguage() {
             const browserLang = navigator.language || navigator.userLanguage;
-            // 如果浏览器语言以zh开头(包含zh-CN, zh-TW等)，返回中文，否则返回英文
             return browserLang.startsWith('zh') ? 'zh' : 'en';
         }
 
@@ -396,7 +433,7 @@
         function updateContent() {
             document.getElementById('langBtn').textContent = currentLang === 'zh' ? 'EN' : '中文';
             document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
-            // 更新网页标题
+
             document.title = i18n[currentLang]['homepage'];
 
             const elements = document.querySelectorAll('[data-i18n]');
@@ -411,12 +448,9 @@
             typeText(i18n[currentLang]['intro'], typingElement);
         }
 
-        // 页面加载时应用语言设置
         document.addEventListener('DOMContentLoaded', updateContent);
 
-        // 右键菜单控制
         document.addEventListener('contextmenu', function (event) {
-            // 检查点击的元素或其父元素是否为链接
             let element = event.target;
             let isLink = false;
 
@@ -428,22 +462,14 @@
                 element = element.parentElement;
             }
 
-            // 如果不是链接元素，则阻止默认行为
             if (!isLink) {
                 event.preventDefault();
             }
         });
 
-        // 禁止复制
         document.addEventListener('copy', event => event.preventDefault());
-
-        // 禁止粘贴
         document.addEventListener('paste', event => event.preventDefault());
-
-        // 禁止剪切
         document.addEventListener('cut', event => event.preventDefault());
-
-        // 禁用F12和其他开发者工具快捷键
         document.addEventListener('keydown', function (event) {
             if (event.keyCode === 123 ||
                 (event.ctrlKey && event.shiftKey && event.keyCode === 73) ||
@@ -456,7 +482,6 @@
         let typingTimer = null;
 
         function typeText(text, element, speed = 100) {
-            // 清除之前的定时器
             if (typingTimer) {
                 clearTimeout(typingTimer);
             }
@@ -486,7 +511,6 @@
             return month === 12 || month === 1 || month === 2;
         }
 
-        // 检查是否应该显示雪花
         function shouldShowSnow() {
             if (!isWinterSeason()) {
                 return false;
@@ -494,39 +518,34 @@
             snowToggle.style.display = 'block';
             const snowEnabled = localStorage.getItem('snowEnabled');
             if (snowEnabled === null) {
-                // 冬季首次访问，默认开启
                 localStorage.setItem('snowEnabled', 'true');
                 snowToggle.classList.add('active');
                 return true;
             } else {
-                // 根据用户设置显示
                 snowToggle.classList.toggle('active', snowEnabled === 'true');
                 return snowEnabled === 'true';
             }
         }
 
-        // 设置Canvas大小为窗口大小
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        // 根据季节控制雪花显示
+
         function initSnowEffect() {
             if (shouldShowSnow()) {
                 canvas.style.display = 'block';
-                // 控制状态
+
                 let isPageVisible = true;
                 let animationFrameId = null;
                 let snowGeneratorId = null;
 
-                // 设置Canvas大小为窗口大小
                 function resizeCanvas() {
                     canvas.width = window.innerWidth;
                     canvas.height = window.innerHeight;
                 }
                 resizeCanvas();
 
-                // 雪花类
                 class Snowflake {
                     constructor() {
                         this.x = Math.random() * canvas.width;
@@ -551,10 +570,8 @@
                     }
                 }
 
-                // 存储当前的雪花
                 const snowflakes = new Set();
 
-                // 生成新雪花的函数
                 function generateSnowflake() {
                     if (!isPageVisible) return;
                     const probability = canvas.width / 1920;
@@ -563,7 +580,6 @@
                     }
                 }
 
-                // 动画循环
                 function animate() {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -578,20 +594,18 @@
                     ctx.fillStyle = 'white';
                     ctx.font = '14px Arial';
 
-                    // 只在页面可见时继续动画
                     if (isPageVisible) {
                         animationFrameId = requestAnimationFrame(animate);
                     }
                 }
 
-                // 控制动画和雪花生成的函数
                 function startSnowEffect() {
                     isPageVisible = true;
-                    // 开始生成雪花
+
                     if (!snowGeneratorId) {
                         snowGeneratorId = setInterval(generateSnowflake, 30);
                     }
-                    // 恢复动画
+
                     if (!animationFrameId) {
                         animate();
                     }
@@ -599,19 +613,19 @@
 
                 function pauseSnowEffect() {
                     isPageVisible = false;
-                    // 停止生成雪花
+
                     if (snowGeneratorId) {
                         clearInterval(snowGeneratorId);
                         snowGeneratorId = null;
+                        console.log('pause snow generator');
                     }
-                    // 停止动画
+
                     if (animationFrameId) {
                         cancelAnimationFrame(animationFrameId);
                         animationFrameId = null;
                     }
                 }
 
-                // 监听页面可见性变化
                 document.addEventListener('visibilitychange', () => {
                     if (document.hidden) {
                         pauseSnowEffect();
@@ -620,12 +634,11 @@
                     }
                 });
 
-                // 监听窗口大小变化
                 window.addEventListener('resize', () => {
                     resizeCanvas();
-                    // 保持当前画面状态
+
                     if (!isPageVisible) {
-                        // 重绘当前雪花位置
+
                         ctx.clearRect(0, 0, canvas.width, canvas.height);
                         for (const snowflake of snowflakes) {
                             snowflake.draw();
@@ -633,7 +646,6 @@
                     }
                 });
 
-                // 初始启动
                 startSnowEffect();
             } else {
                 canvas.style.display = 'none';
