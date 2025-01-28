@@ -21,7 +21,6 @@
         }
 
         :root[data-theme="dark"] {
-            /* 暗色主题变量 */
             --primary-color: #58a6ff;
             --hover-color: #79b8ff;
             --bg-color: #0d1117;
@@ -33,7 +32,6 @@
             --box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
         }
 
-        /* 添加新的容器样式 */
         .buttons-container {
             position: fixed;
             top: 20px;
@@ -44,7 +42,6 @@
             z-index: 1000;
         }
 
-        /* 添加以下样式确保隐藏的按钮不占空间 */
         .buttons-container>*[style*="display: none"],
         .buttons-container>.hidden {
             display: none !important;
@@ -54,9 +51,7 @@
             height: 0 !important;
         }
 
-        /* 修改现有按钮样式 */
         .language-switch {
-            /* 移除 position, top, right */
             background: var(--inner-color);
             padding: 8px 16px;
             border-radius: 20px;
@@ -67,7 +62,6 @@
         }
 
         .theme-toggle {
-            /* 移除 position, top, right */
             padding: 8px 16px;
             background: var(--inner-color);
             border-radius: 20px;
@@ -76,7 +70,6 @@
         }
 
         .snow-toggle {
-            /* 移除 position, top, right */
             padding: 8px 16px;
             background: var(--inner-color);
             border-radius: 20px;
@@ -84,7 +77,6 @@
             cursor: pointer;
             box-shadow: var(--box-shadow);
             display: none;
-            /* 默认隐藏 */
         }
 
         .language-switch:hover {
@@ -209,7 +201,6 @@
 
             .nav-box {
                 width: calc(50% - 7.5px);
-                /* 考虑间距的一半宽度 */
             }
         }
 
@@ -310,6 +301,15 @@
                     <span data-i18n="claude"></span>
                 </a>
                 <p class="nav-description" data-i18n="claude-desc"></p>
+            </div>
+        </div>
+        <div class="nav-container">
+            <div class="nav-box">
+                <a href="https://mirrors.davidx.top">
+                    <img src="https://wiki.davidx.top/favicon.ico" alt="Wikipedia" class="link-icon">
+                    <span data-i18n="wikipedia"></span>
+                </a>
+                <p class="nav-description" data-i18n="wikipedia-desc"></p>
             </div>
         </div>
     </div>
