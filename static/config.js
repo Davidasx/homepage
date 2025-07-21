@@ -72,23 +72,23 @@ const config = {
                     "url": "https://github.davidx.top",
                     "icon": "static/github.ico",
                     "en_name": "GitHub File Acceleration",
-                    "zh_name": "GitHub文件加速",
+                    "zh_name": "GitHub 文件加速",
                     "en_desc": "Accelerates GitHub file downloading. For study purposes only.",
                     "zh_desc": "加速GitHub文件下载，仅供学习目的。"
                 },
                 {
                     "url": "https://wiki.davidx.top",
                     "icon": "https://wiki.davidx.top/favicon.ico",
-                    "en_name": "Wikipedia",
-                    "zh_name": "维基百科",
+                    "en_name": "Wikipedia Mirror",
+                    "zh_name": "维基百科镜像",
                     "en_desc": "Mirror site of Wikipedia. For study purposes only.",
                     "zh_desc": "维基百科镜像站，仅供学习目的。"
                 },
                 {
                     "url": "https://claude.davidx.top",
                     "icon": "https://claude.davidx.top/favicon.ico",
-                    "en_name": "Claude",
-                    "zh_name": "Claude",
+                    "en_name": "Claude Mirror",
+                    "zh_name": "Claude 镜像",
                     "en_desc": "Use claude.ai without getting banned. For study purposes only.",
                     "zh_desc": "稳定使用claude.ai，避免封号，仅供学习目的。"
                 },
