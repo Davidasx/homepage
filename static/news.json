@@ -1,0 +1,75 @@
+{
+    "news_items": [
+        {
+            "affected_services": [
+                "Claude-PL"
+            ],
+            "type": "incident",
+            "time": "2025-04-02T00:17Z",
+            "en_title": "Claude-PL is unavailable",
+            "zh_title": "Claude-PL无法使用",
+            "en_desc": "Due to Serv00 restrictions, Claude-PL is unavailable.",
+            "zh_desc": "受Serv00封控影响，Claude-PL无法使用。"
+        },
+        {
+            "affected_services": [
+                "Claude Mirror"
+            ],
+            "type": "incident",
+            "time": "2025-05-06T23:41Z",
+            "en_title": "Claude-US is experiencing issues",
+            "zh_title": "Claude-US遇到故障",
+            "en_desc": "Accessing Claude-US currently shows 'This site can’t be reached.' The upstream developer of Fuclaude is working on a fix.",
+            "zh_desc": "目前访问Claude-US会提示“无法通过此地址访问网站”，Fuclaude上游开发者正在修复。"
+        },
+        {
+            "affected_services": [
+                "Claude Mirror"
+            ],
+            "type": "fix",
+            "time": "2025-05-09T00:06Z",
+            "en_title": "Claude-US update complete",
+            "zh_title": "Claude-US更新完毕",
+            "en_desc": "The Fuclaude main program has been updated and can be accessed normally. Previous users will not be banned. Currently using CloudFlare Warp to access.",
+            "zh_desc": "更新Fuclaude主程序，可以正常访问，之前使用过的不会被封号。目前采用CloudFlare Warp中转访问。"
+        },
+        {
+            "affected_services": [
+                "Claude Mirror",
+                "Gemini-Chat",
+                "Raccon-API"
+            ],
+            "type": "maintenance",
+            "time": "2025-07-24T14:30Z",
+            "en_title": "Azure server migration",
+            "zh_title": "Azure服务器迁移",
+            "en_desc": "To improve the access speed of Azure server, the Azure server will be migrated from the United States to Japan.",
+            "zh_desc": "为了提高Azure服务器访问速度，将Azure服务器从美国迁移到日本。"
+        },
+        {
+            "affected_services": [
+                "Claude Mirror",
+                "Gemini-Chat",
+                "Raccon-API"
+            ],
+            "type": "fix",
+            "time": "2025-07-25T06:30Z",
+            "en_title": "Azure server migration complete",
+            "zh_title": "Azure服务器迁移完毕",
+            "en_desc": "Azure server has been successfully migrated, all services are back online.",
+            "zh_desc": "Azure服务器迁移完毕，所有服务恢复正常。"
+        },
+        {
+            "affected_services": [
+                "Claude-PL",
+                "WebProxy"
+            ],
+            "type": "end",
+            "time": "2025-07-25T14:34Z",
+            "en_title": "All Serv00 related projects have been terminated",
+            "zh_title": "Serv00相关项目全部终止服务",
+            "en_desc": "Due to the instability and restrictions of the Serv00 service, all related projects have been terminated.",
+            "zh_desc": "由于Serv00服务不稳定和封控问题，所有相关项目全部终止服务。"
+        }
+    ]
+}

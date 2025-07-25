@@ -1,20 +1,14 @@
 
-async function fetchConfig() {
-    try {
-        const response = await fetch('static/config.js');
-        const text = await response.text();
-        // Assuming config.js contains a variable assignment like "const config = {...};"
-        // We can evaluate it to get the object.
-        // A safer approach would be to have config.js be a pure JSON file.
-        // For now, let's stick to the eval-like approach but with a function constructor
-        // to limit scope.
-        const config = new Function(`${text}; return config;`)();
-        return config;
-    } catch (error) {
-        console.error('Failed to load config:', error);
-        // Return a default or empty config to prevent further errors
-        return { i18n: {}, categories: [] };
-    }
+async function loadConfig() {
+    const response = await fetch('static/config.json');
+    config = await response.json();
+}
+
+let news = {};
+
+async function loadNews() {
+    const response = await fetch('static/news.json');
+    news = await response.json();
 }
 
 function detectBrowserLanguage() {
@@ -23,14 +17,15 @@ function detectBrowserLanguage() {
 }
 
 let currentLang = localStorage.getItem('language') || detectBrowserLanguage();
+let config;
 
 function toggleLanguage() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('language', currentLang);
-    updateContent(window.config);
+    updateContent();
 }
 
-function updateContent(config) {
+function updateContent() {
     document.getElementById('langBtn').textContent = currentLang === 'zh' ? 'EN' : '中文';
     document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
 
@@ -43,14 +38,102 @@ function updateContent(config) {
             element.textContent = config.i18n[currentLang][key];
         }
     });
-    generateSites(config);
+    generateSites();
     const typingElement = document.getElementById('typing-text');
-    typeText(config.i18n[currentLang]['intro'], typingElement);
+    if (config.i18n[currentLang]['intro']) {
+        typeText(config.i18n[currentLang]['intro'], typingElement);
+    }
 }
 
-function generateSites(config) {
+function getStatusColor(type) {
+    switch (type) {
+        case 'launch':
+        case 'fix':
+            return '#28a745'; // normal
+        case 'incident':
+            return '#dc3545'; // incident
+        case 'maintenance':
+            return '#ffc107'; // maintenance
+        case 'end':
+            return '#6c757d'; // end
+        default:
+            return '#6c757d';
+    }
+}
+
+function populateNewsModal() {
+    const newsList = document.getElementById('news-list');
+    newsList.innerHTML = '';
+    if (news.news_items) {
+        const sortedNews = news.news_items.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+        sortedNews.forEach(item => {
+            const newsItemDiv = document.createElement('div');
+            newsItemDiv.className = 'news-item';
+
+            const newsHeader = document.createElement('div');
+            newsHeader.className = 'news-header';
+
+            const indicator = document.createElement('div');
+            indicator.className = 'news-type-indicator';
+            indicator.style.backgroundColor = getStatusColor(item.type);
+            newsHeader.appendChild(indicator);
+
+            const title = document.createElement('span');
+            title.className = 'news-title';
+            title.textContent = item[`${currentLang}_title`];
+            newsHeader.appendChild(title);
+
+            const time = document.createElement('span');
+            time.className = 'news-time';
+            time.textContent = new Date(item.time).toLocaleString();
+            newsHeader.appendChild(time);
+
+            const description = document.createElement('p');
+            description.className = 'news-description';
+            description.textContent = item[`${currentLang}_desc`];
+
+            newsItemDiv.appendChild(newsHeader);
+            newsItemDiv.appendChild(description);
+            newsList.appendChild(newsItemDiv);
+        });
+    }
+}
+
+function calculateServiceStatus() {
+    const serviceStatus = {};
+    if (news.news_items) {
+        news.news_items.forEach(item => {
+            let status;
+            switch (item.type) {
+                case 'launch':
+                case 'fix':
+                    status = 'normal';
+                    break;
+                case 'incident':
+                    status = 'incident';
+                    break;
+                case 'maintenance':
+                    status = 'maintenance';
+                    break;
+                case 'end':
+                    status = 'end';
+                    break;
+                default:
+                    status = 'normal';
+            }
+            item.affected_services.forEach(serviceName => {
+                serviceStatus[serviceName] = status;
+            });
+        });
+    }
+    return serviceStatus;
+}
+
+function generateSites() {
     const sitesContainer = document.getElementById('sites-container');
     sitesContainer.innerHTML = '';
+    const serviceStatus = calculateServiceStatus();
 
     config.categories.forEach(category => {
         const categoryDiv = document.createElement('div');
@@ -66,6 +149,12 @@ function generateSites(config) {
         category.sites.forEach(site => {
             const navBox = document.createElement('div');
             navBox.className = 'nav-box';
+
+            const status = serviceStatus[site.en_name] || 'normal';
+            const statusIndicator = document.createElement('div');
+            statusIndicator.className = `status-indicator status-${status}`;
+            statusIndicator.title = status.charAt(0).toUpperCase() + status.slice(1);
+            navBox.appendChild(statusIndicator);
 
             const link = document.createElement('a');
             link.href = site.obfuscated ? atob(site.url) : site.url;
@@ -97,8 +186,28 @@ function generateSites(config) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    window.config = await fetchConfig();
-    updateContent(window.config);
+    await loadConfig();
+    await loadNews();
+    updateContent();
+
+    const newsModal = document.getElementById('news-modal');
+    const newsBtn = document.getElementById('newsBtn');
+    const closeBtn = document.querySelector('.close-button');
+
+    newsBtn.onclick = () => {
+        populateNewsModal();
+        newsModal.style.display = 'flex';
+    };
+
+    closeBtn.onclick = () => {
+        newsModal.style.display = 'none';
+    };
+
+    window.onclick = event => {
+        if (event.target == newsModal) {
+            newsModal.style.display = 'none';
+        }
+    };
 });
 
 document.addEventListener('contextmenu', function (event) {
@@ -121,14 +230,6 @@ document.addEventListener('contextmenu', function (event) {
 document.addEventListener('copy', event => event.preventDefault());
 document.addEventListener('paste', event => event.preventDefault());
 document.addEventListener('cut', event => event.preventDefault());
-document.addEventListener('keydown', function (event) {
-    if (event.keyCode === 123 ||
-        (event.ctrlKey && event.shiftKey && event.keyCode === 73) ||
-        (event.ctrlKey && event.keyCode === 85)) {
-        event.preventDefault();
-        return false;
-    }
-});
 
 let typingTimer = null;
 
@@ -139,6 +240,7 @@ function typeText(text, element, speed = 100) {
 
     let index = 0;
     element.textContent = '';
+    if (!text) return;
 
     function type() {
         if (index < text.length) {

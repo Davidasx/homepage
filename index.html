@@ -32,6 +32,116 @@
             --box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
         }
 
+        .buttons-container-left {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .news-button {
+            background: var(--inner-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            color: var(--text-color);
+        }
+
+        .news-button:hover {
+            background: var(--hover-inner-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.4);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--bg-color);
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+
+        .close-button {
+            color: var(--subtext-color);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--text-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #news-list {
+            margin-top: 20px;
+            text-align: left;
+            overflow-y: auto;
+            flex-grow: 1;
+            padding-right: 10px;
+        }
+
+        .news-item {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .news-type-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .news-title {
+            font-weight: bold;
+        }
+
+        .news-time {
+            margin-left: auto;
+            font-size: 0.9em;
+            color: var(--subtext-color);
+        }
+
+        .news-description {
+            margin-left: 20px;
+            color: var(--subtext-color);
+        }
+
         .buttons-container {
             position: fixed;
             top: 20px;
@@ -128,6 +238,32 @@
             padding: 15px;
             transition: transform 0.2s ease;
             width: 100%;
+            position: relative;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .status-normal {
+            background-color: #28a745;
+        }
+
+        .status-incident {
+            background-color: #dc3545;
+        }
+
+        .status-maintenance {
+            background-color: #ffc107;
+        }
+
+        .status-end {
+            background-color: #6c757d;
         }
 
         .nav-box:hover {
@@ -223,6 +359,9 @@
 </head>
 
 <body>
+    <div class="buttons-container-left">
+        <button class="news-button" id="newsBtn" data-i18n="news_button">News</button>
+    </div>
     <div class="buttons-container">
         <button class="theme-toggle" id="themeToggle">🌙</button>
         <button class="language-switch" onclick="toggleLanguage()" id="langBtn">EN</button>
@@ -236,6 +375,15 @@
     <div id="sites-container">
 
     </div>
+
+    <div id="news-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 data-i18n="news_title">News</h2>
+            <div id="news-list"></div>
+        </div>
+    </div>
+
     <script src="static/script.js"></script>
 </body>
 

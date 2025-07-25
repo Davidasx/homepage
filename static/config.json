@@ -1,4 +1,4 @@
-const config = {
+{
     "i18n": {
         "en": {
             "homepage": "DavidX's Homepage",
@@ -6,7 +6,9 @@ const config = {
             "mirrors": "Mirror Sites",
             "personal": "Personal",
             "contact": "Contact",
-            "intro": "Hello, I'm DavidX, a personal developer who loves coding. Welcome to my homepage! You can check out the tools I've made or visit my blog. Feel free to contact me anytime!"
+            "intro": "Hello, I'm DavidX, a personal developer who loves coding. Welcome to my homepage! You can check out the tools I've made or visit my blog. Feel free to contact me anytime!",
+            "news_button": "News",
+            "news_title": "Latest Updates"
         },
         "zh": {
             "homepage": "DavidX的主页",
@@ -14,7 +16,9 @@ const config = {
             "mirrors": "镜像网站",
             "personal": "个人",
             "contact": "联系",
-            "intro": "您好，我是DavidX，一名热爱编程的个人开发者。欢迎来到我的主页！您可以查看我做的各种工具，或者访问我的博客。如果您感兴趣，可以随时联系我！"
+            "intro": "您好，我是DavidX，一名热爱编程的个人开发者。欢迎来到我的主页！您可以查看我做的各种工具，或者访问我的博客。如果您感兴趣，可以随时联系我！",
+            "news_button": "新闻",
+            "news_title": "最新动态"
         }
     },
     "categories": [
@@ -101,8 +105,8 @@ const config = {
                 {
                     "url": "https://blog.davidx.top",
                     "icon": "https://blog.davidx.top/assets/img/favicons/favicon.ico",
-                    "en_name": "Blog (International)",
-                    "zh_name": "博客（国际版）",
+                    "en_name": "Blog (English)",
+                    "zh_name": "博客（英文版）",
                     "en_desc": "My personal blog, written in English.",
                     "zh_desc": "英文版的个人博客。"
                 },
@@ -110,7 +114,7 @@ const config = {
                     "url": "https://blog-zh.davidx.top",
                     "icon": "https://blog-zh.davidx.top/assets/img/favicons/favicon.ico",
                     "en_name": "Blog (Chinese)",
-                    "zh_name": "博客（国内版）",
+                    "zh_name": "博客（中文版）",
                     "en_desc": "My personal blog, written in Chinese.",
                     "zh_desc": "中文版的个人博客。"
                 }
@@ -149,4 +153,4 @@ const config = {
             ]
         }
     ]
-}; 
+}
