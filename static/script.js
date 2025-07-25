@@ -1,4 +1,22 @@
 
+async function fetchConfig() {
+    try {
+        const response = await fetch('static/config.js');
+        const text = await response.text();
+        // Assuming config.js contains a variable assignment like "const config = {...};"
+        // We can evaluate it to get the object.
+        // A safer approach would be to have config.js be a pure JSON file.
+        // For now, let's stick to the eval-like approach but with a function constructor
+        // to limit scope.
+        const config = new Function(`${text}; return config;`)();
+        return config;
+    } catch (error) {
+        console.error('Failed to load config:', error);
+        // Return a default or empty config to prevent further errors
+        return { i18n: {}, categories: [] };
+    }
+}
+
 function detectBrowserLanguage() {
     const browserLang = navigator.language || navigator.userLanguage;
     return browserLang.startsWith('zh') ? 'zh' : 'en';
@@ -9,10 +27,10 @@ let currentLang = localStorage.getItem('language') || detectBrowserLanguage();
 function toggleLanguage() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
     localStorage.setItem('language', currentLang);
-    updateContent();
+    updateContent(window.config);
 }
 
-function updateContent() {
+function updateContent(config) {
     document.getElementById('langBtn').textContent = currentLang === 'zh' ? 'EN' : '中文';
     document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
 
@@ -25,12 +43,12 @@ function updateContent() {
             element.textContent = config.i18n[currentLang][key];
         }
     });
-    generateSites();
+    generateSites(config);
     const typingElement = document.getElementById('typing-text');
     typeText(config.i18n[currentLang]['intro'], typingElement);
 }
 
-function generateSites() {
+function generateSites(config) {
     const sitesContainer = document.getElementById('sites-container');
     sitesContainer.innerHTML = '';
 
@@ -50,7 +68,9 @@ function generateSites() {
             navBox.className = 'nav-box';
 
             const link = document.createElement('a');
-            link.href = site.url;
+            link.href = site.obfuscated ? atob(site.url) : site.url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
 
             const icon = document.createElement('img');
             icon.src = site.icon;
@@ -76,8 +96,9 @@ function generateSites() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    updateContent();
+document.addEventListener('DOMContentLoaded', async () => {
+    window.config = await fetchConfig();
+    updateContent(window.config);
 });
 
 document.addEventListener('contextmenu', function (event) {
