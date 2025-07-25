@@ -57,14 +57,6 @@
                     "zh_name": "网站监控",
                     "en_desc": "Status monitor for my websites.",
                     "zh_desc": "监控我网站的状态。"
-                },
-                {
-                    "url": "https://news.davidx.top",
-                    "icon": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📰</text></svg>",
-                    "en_name": "Service News",
-                    "zh_name": "服务动态",
-                    "en_desc": "Service status and updates.",
-                    "zh_desc": "各种网站的状态和更新。"
                 }
             ]
         },
