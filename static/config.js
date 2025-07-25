@@ -91,14 +91,6 @@ const config = {
                     "zh_name": "Claude 镜像",
                     "en_desc": "Use claude.ai without getting banned. For study purposes only.",
                     "zh_desc": "稳定使用claude.ai，避免封号，仅供学习目的。"
-                },
-                {
-                    "url": "https://web.davidx.top/proxy/",
-                    "icon": "static/chrome.ico",
-                    "en_name": "Web Proxy",
-                    "zh_name": "网页代理",
-                    "en_desc": "Web proxy that works for many websites. For study purposes only.",
-                    "zh_desc": "支持多网站的网页代理，仅供学习目的。"
                 }
             ]
         },
